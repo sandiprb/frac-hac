@@ -2,7 +2,7 @@
 
 ## Basic Structure
 The structure is as follows:
-* data: has the datasets files
+* data: has the datasets files. Create it if it doesn't exist and put compressed gz data files there.
 * modules: has the custom modules created by us
 * notebooks: has the jupyter notebooks
 

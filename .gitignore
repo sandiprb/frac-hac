@@ -1,6 +1,6 @@
 
 .idea/
-
+.ipynb_checkpoints/
 *.pyc
 *.csv
 *.gz

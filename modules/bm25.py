@@ -8,9 +8,10 @@ import math
 df = pd.read_csv('sample_ques.csv',header=None,index_col=0,names=['question'])
 print df.head()
 
+
 class BM25:
 
-    def __init__(self,corpus):
+    def __init__(self, corpus):
         self.corpus = corpus
         self.dictionary = corpora.Dictionary()
         self.buildCorpus()
@@ -23,7 +24,8 @@ class BM25:
 
     def buildCorpus(self):
         raw_data = []
-        for data in self.corpus:
+        for value in self.corpus.items():
+            data = value['question']
             tokens = word_tokenize(data)
             raw_data.append(tokens)
         self.dictionary.add_documents(raw_data)
@@ -31,6 +33,7 @@ class BM25:
     def generateTFIDF(self):
         tot_doc_length = 0
         for data in self.corpus:
+            #doc = data
             doc = word_tokenize(data)
             tot_doc_length += len(doc)
             self.docLen.append(len(doc))
@@ -54,7 +57,7 @@ class BM25:
     def getBM25Scores(self,query=[],k1=1.5, b=0.75):
         query_bow = self.dictionary.doc2bow(query)
         scores = []
-
+        #for id in self.corpus.keys():
         for indx, doc in enumerate(self.docTF):
             common_terms = set(doc.keys()) & set(dict(query_bow).keys())
             doc_terms_len = self.docLen[indx]
@@ -69,9 +72,8 @@ class BM25:
 corpus = df.question.values.tolist()
 bm = BM25(corpus)
 
-query = 'can you fit make up brushes in the trays'
+query = 'make up brushes in the trays'
 query = word_tokenize(query)
-
 scores = bm.getBM25Scores(query)
 
 print scores

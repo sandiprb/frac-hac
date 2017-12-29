@@ -1,5 +1,4 @@
 import pandas as pd
-import gensim
 from gensim import corpora
 from nltk.tokenize import word_tokenize
 import math

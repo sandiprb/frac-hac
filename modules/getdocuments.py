@@ -12,7 +12,8 @@ class Document(object):
 
     def getDocuments(self):
         """
-
+        Fetches all the documents returned by DB for a PID
+        And creates a dict of key(id) and value(question)
         :return:
         """
         data = {}
@@ -25,11 +26,10 @@ class Document(object):
 
     def sortDictionary(self,dict):
         """
+        Sorts the results returned after calculating BM25
 
         :param dict:
         :return:
         """
         sorted_dic = sorted(dict.items(), key=operator.itemgetter(1))
         return sorted_dic
-
-

@@ -10,3 +10,4 @@
 *.pyc
 *.csv
 *.gz
+.python-version

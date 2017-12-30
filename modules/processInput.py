@@ -20,11 +20,19 @@ class Input(object):
 		"""
 
         self.query = query
-        self.product_id = product_id
+        self.product_id = self.extract_pid()
         self.lower_query = self.caseQuery()
         self.tokens = self.tokenizeQuery()
         self.stemmed_tokens = self.stemQuery(PorterStemmer(), self.tokens)
         self.lemma_tokens = self.lemmatizeQuery(WordNetLemmatizer(), self.tokens)
+
+    def extract_pid(self):
+        """
+        Extracts Product Id from Raw Query
+        :return:
+        """
+        pid = re.findall(r"[A-Z0-9]{10}", self.query)
+        return pid
 
     def parseInputQuery(self):
         """
@@ -111,7 +119,7 @@ print input.tokens
 #print input.lemma_tokens
 #pattern = re.compile(r"^[A-Z0-9]{10}$")
 #print pattern.match(query)
-
+print as_in
 #print as_in
 
 #print query

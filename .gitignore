@@ -11,3 +11,7 @@
 *.csv
 *.gz
 .python-version
+
+
+app/static/build/
+app/static/node_modules/

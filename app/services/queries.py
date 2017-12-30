@@ -1,5 +1,7 @@
 from mongo import mongo
 from bson import json_util
+from bson.objectid import ObjectId
+
 import json
 
 
@@ -23,6 +25,12 @@ def find_by_textscore(text):
 
 def find_by_asin(asin):
     cursor = mongo.db.qna.find({'asin': asin})
+    result = cursor_to_list(cursor)
+    return result
+
+
+def find_by_id(object_id):
+    cursor = mongo.db.qna.find({'_id': ObjectId(object_id)})
     result = cursor_to_list(cursor)
     return result
 

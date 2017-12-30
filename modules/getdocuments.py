@@ -1,4 +1,3 @@
-import operator
 
 class Document(object):
 
@@ -23,13 +22,3 @@ class Document(object):
             question = line['question']
             data[doc_id] = question
         return data
-
-    def sortDictionary(self,dict):
-        """
-        Sorts the results returned after calculating BM25
-
-        :param dict:
-        :return:
-        """
-        sorted_dic = sorted(dict.items(), key=operator.itemgetter(1))
-        return sorted_dic

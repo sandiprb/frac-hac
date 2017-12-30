@@ -18,7 +18,6 @@ class BM25(object):
         self.data = data
         self.query = query
         self.result = self.get_bm25_scores()
-        self.best_result = self.getKBest()
 
     def get_bm25_scores(self):
         """
@@ -33,23 +32,22 @@ class BM25(object):
         """
         corpus_df = pd.DataFrame(self.data.values(), index=self.data.keys(), columns=['question'])
         corpus = [word_tokenize(ques) for ques in corpus_df.question]
-        bm25 = BM25(corpus)
+        bm25 = LibBM25(corpus)
         average_idf = sum(float(val) for val in bm25.idf.values()) / float(len(bm25.idf))
         query = word_tokenize(self.query)
         scores = bm25.get_scores(query, average_idf)
         corpus_df['scores'] = scores
-        dic = {qid: score for qid, score in zip(corpus_df.index, corpus_df.scores)}
-        sorted_dic = OrderedDict(reversed(sorted(dic.items(), key=lambda t: t[0])))
-        return sorted_dic
+        return corpus_df.sort_values(by='scores', ascending=False)
 
-    def getKBest(self, k=1):
+    def get_best(self, k=1):
         """
         Selects 'k' best question.reviews after calculating BM25 scores
         :param dic:
         :param k:
         :return:
         """
-        k_best_vals = {key: self.result[key] for key in self.result.keys()[:k]}
+        k_scores = self.result['scores'][:k]
+        k_best_vals = zip(k_scores.index, k_scores)
         return k_best_vals
 
 

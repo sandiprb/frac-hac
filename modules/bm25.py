@@ -39,7 +39,8 @@ class BM25(object):
         corpus_df['scores'] = scores
         return corpus_df.sort_values(by='scores', ascending=False)
 
-    def get_best(self, k=1):
+
+    def get_k_best(self, k=1):
         """
         Selects 'k' best question.reviews after calculating BM25 scores
         :param dic:
@@ -49,5 +50,13 @@ class BM25(object):
         k_scores = self.result['scores'][:k]
         k_best_vals = zip(k_scores.index, k_scores)
         return k_best_vals
+
+    def get_best(self):
+        """
+        Especially made for lazy devs
+        :return:
+        :rtype: tuple
+        """
+        return self.get_k_best(k=1)[0]
 
 

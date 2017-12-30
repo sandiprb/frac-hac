@@ -1,5 +1,4 @@
 from flask import Flask, render_template
-from flask_pymongo import PyMongo
 
 import settings
 from api.controllers import api
@@ -8,8 +7,7 @@ from services.mongo import mongo
 app = Flask(
     __name__,
     template_folder=settings.TEMPLATES_DIR,
-    static_folder='static'
-    )
+    static_folder='static')
 
 app.config['MONGO_DBNAME'] = settings.DB_NAME
 app.config['MONGO_URI'] = settings.DB_URI

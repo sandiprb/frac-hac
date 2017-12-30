@@ -21,4 +21,3 @@ def find_by_pid():
         result['data'] = 'No data found!'
 
     return jsonify(result)
-

@@ -1,8 +1,5 @@
 from mongo import mongo
-from bson import json_util
 from bson.objectid import ObjectId
-
-import json
 
 
 def cursor_to_list(cursor):

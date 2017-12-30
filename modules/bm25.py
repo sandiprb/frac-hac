@@ -1,4 +1,4 @@
-from gensim.summarization.bm25 import BM25
+from gensim.summarization.bm25 import BM25 as LibBM25
 from nltk.tokenize import word_tokenize
 import pandas as pd
 import operator
@@ -32,7 +32,7 @@ class BM25(object):
         """
         corpus_df = pd.DataFrame(self.data.values(), index=self.data.keys(), columns=['question'])
         corpus = [word_tokenize(ques) for ques in corpus_df.question]
-        bm25 = BM25(corpus)
+        bm25 = LibBM25(corpus)
         average_idf = sum(float(val) for val in bm25.idf.values()) / float(len(bm25.idf))
         query = word_tokenize(self.query)
         scores = bm25.get_scores(query, average_idf)

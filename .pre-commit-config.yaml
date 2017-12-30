@@ -1,0 +1,29 @@
+repos:
+# -   repo: https://github.com/prettier/prettier
+#     sha: 1.8.2
+#     hooks:
+#     -   id: prettier
+#         name: TypeScript - PostCSS Prettier
+#         files: (\.ts|\.tsx|./pcss/.*\.css)$
+-   repo: git://github.com/pre-commit/pre-commit-hooks
+    sha: v0.9.4
+    hooks:
+    -   id: trailing-whitespace
+        exclude: \.(css|ts|tsx|bck|csv)$
+    -   id: check-merge-conflict
+    # -   id: check-json
+    -   id: debug-statements
+    -   id: check-added-large-files
+        args: [--maxkb=10000]
+    -   id: flake8
+        args: [--max-line-length=131, --ignore=W503]
+        exclude: (tests/.*|.*/migrations/.*\.py|.*/custom_dictionaries.py)$
+-   repo: local
+    hooks:
+    -   id: isort
+        name: Sorting Imports
+        entry: isort
+        language: system
+        args: ["-y"]
+        files: \.py$
+        requirements: true

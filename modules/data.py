@@ -37,9 +37,13 @@ class Vector(object):
 		:rtype:
 		"""
 		regexTknzr = RegexpTokenizer(r'\w+')
-		vect = self.vect_type(tokenizer=regexTknzr.tokenize, ngram_range=(1, self.n), stop_words='english',
-							  max_df=self.max_df,
-							  min_df=self.min_df)
+		vect = self.vect_type(
+			tokenizer=regexTknzr.tokenize,
+			ngram_range=(1, self.n),
+			stop_words='english',
+			max_df=self.max_df,
+			min_df=self.min_df
+			)
 		vect.fit(self.data)
 		return vect
 

@@ -17,6 +17,21 @@ def get_most_relevant_question(raw_query):
 
     data = {i['id']: i['question'] for i in data}
     bm25 = BM25(data, raw_query)
-    object_id, score = bm25.get_best()
+    object_id, _ = bm25.get_best()
     result = queries.find_by_id(object_id)
     return result
+
+
+def get_most_relevant_reviews(query, pid):
+    data = queries.find_reviews_by_asin_with_textscore(pid, query)
+    if not data:
+        return None
+
+    data = {i['id']: i['reviewText'] for i in data}
+    bm25 = BM25(data, query)
+    bm25_reviews = bm25.get_k_best(k=3)
+    review_ids = [i[0] for i in bm25_reviews]
+    db_fetched_reviews = queries.find_reviews_by_ids(review_ids)
+    return db_fetched_reviews
+
+

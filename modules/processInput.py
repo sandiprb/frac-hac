@@ -4,12 +4,13 @@ from nltk.corpus import wordnet
 from nltk.tokenize import word_tokenize, TreebankWordTokenizer, RegexpTokenizer
 from nltk.stem.porter import PorterStemmer
 from nltk.stem import WordNetLemmatizer
+import re
 
 nlp = spacy.load('en')
 
 
 class Input(object):
-    """Class responsibe for Handling Input and preprocessing the input"""
+    """Class responsible for Handling Input and preprocessing the input"""
 
     def __init__(self, query, product_id):
         """
@@ -96,17 +97,22 @@ class Input(object):
             for other_doc in [doc1, doc2, doc3]:
                 print(doc.similarity(other_doc))
 
+query = "What are the 'B00KYWMYEE' 100 tray size dimensions please? Height - width - depth (how deep is the tray please). I need to know how deep the trays are because I have some taller items that I'd like to store in the case. It isn't stated. Thank you."
+as_in = re.findall(r"[A-Z0-9]{10}",query)
 
-input = Input(
-    u"What are the 100 tray size dimensions please? Height - width - depth (how deep is the tray please). I need to know how deep the trays are because I have some taller items that I'd like to store in the case. It isn't stated. Thank you.",
-    'A10000')
+input = Input(unicode(query),as_in)
 input_tokens = input.tokenizeQuery()
 
-stem_query = input.stemQuery(PorterStemmer(), input_tokens)
-lemma_query = input.lemmatizeQuery(WordNetLemmatizer(), input_tokens)
+#stem_query = input.stemQuery(PorterStemmer(), input_tokens)
+#lemma_query = input.lemmatizeQuery(WordNetLemmatizer(), input_tokens)
 
 print input.tokens
-print input.stemmed_tokens
-print input.lemma_tokens
+#print input.stemmed_tokens
+#print input.lemma_tokens
+#pattern = re.compile(r"^[A-Z0-9]{10}$")
+#print pattern.match(query)
 
-print input.findSimilarWords(input.tokens)
+#print as_in
+
+#print query
+#print input.findSimilarWords(input.tokens)

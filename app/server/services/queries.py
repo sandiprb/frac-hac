@@ -12,7 +12,7 @@ def find_by_textscore(text):
 
 
 def find_by_asin(asin):
-    cursor = mongo.db.QnA.find({"asin": asin})
+    cursor = mongo.db.qna.find({"asin": asin})
     result = []
     for item in cursor:
         item['id'] = str(item['_id'])

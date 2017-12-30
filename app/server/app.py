@@ -5,7 +5,6 @@ import settings
 from api.controllers import api
 from services.mongo import mongo
 
-
 app = Flask(
     __name__,
     template_folder=settings.TEMPLATES_DIR,

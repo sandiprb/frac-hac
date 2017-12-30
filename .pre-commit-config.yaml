@@ -19,12 +19,13 @@ repos:
         args: ['--max-line-length=131', '--ignore=W503,W191']
         exclude: (tests/.*|.*/migrations/.*\.py|.*/custom_dictionaries.py)$
         files: \.py$
--   repo: local
-    hooks:
-    -   id: isort
-        name: Sorting Imports
-        entry: isort
-        language: system
-        args: ["-y"]
-        files: \.py$
         requirements: true
+# -   repo: local
+#     hooks:
+#     -   id: isort
+#         name: Sorting Imports
+#         entry: isort
+#         language: system
+#         args: ["-y"]
+#         files: \.py$
+#         requirements: true

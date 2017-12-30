@@ -42,8 +42,7 @@ class Vector(object):
 			ngram_range=(1, self.n),
 			stop_words='english',
 			max_df=self.max_df,
-			min_df=self.min_df
-			)
+			min_df=self.min_df)
 		vect.fit(self.data)
 		return vect
 

@@ -1,10 +1,11 @@
+import re
+
 import nltk
 import spacy
 from nltk.corpus import wordnet
-from nltk.tokenize import word_tokenize, TreebankWordTokenizer, RegexpTokenizer
-from nltk.stem.porter import PorterStemmer
 from nltk.stem import WordNetLemmatizer
-import re
+from nltk.stem.porter import PorterStemmer
+from nltk.tokenize import RegexpTokenizer, TreebankWordTokenizer, word_tokenize
 
 nlp = spacy.load('en')
 

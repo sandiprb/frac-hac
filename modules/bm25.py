@@ -1,8 +1,10 @@
-from gensim.summarization.bm25 import BM25 as LibBM25
-from nltk.tokenize import word_tokenize
-import pandas as pd
 import operator
 from collections import OrderedDict
+
+import pandas as pd
+from gensim.summarization.bm25 import BM25 as LibBM25
+from nltk.tokenize import word_tokenize
+
 
 class BM25(object):
     """
@@ -58,5 +60,3 @@ class BM25(object):
         :rtype: tuple
         """
         return self.get_k_best(k=1)[0]
-
-

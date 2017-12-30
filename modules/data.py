@@ -1,9 +1,10 @@
-import pandas as pd
-import gzip
 import glob
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-from nltk.tokenize import word_tokenize, TreebankWordTokenizer, RegexpTokenizer
+import gzip
 import re
+
+import pandas as pd
+from nltk.tokenize import RegexpTokenizer, TreebankWordTokenizer, word_tokenize
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 
 class Data(object):

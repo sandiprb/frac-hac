@@ -1,6 +1,6 @@
-import sys
-sys.path.append("..")
-sys.path.append("....")
+import sys  # noqa
+sys.path.append("..")  # noqa
+sys.path.append("....")  # noqa
 
 
 from modules.processInput import Input as ProcessInput

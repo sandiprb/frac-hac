@@ -12,7 +12,7 @@ nlp = spacy.load('en')
 class Input(object):
     """Class responsible for Handling Input and preprocessing the input"""
 
-    def __init__(self, query, product_id):
+    def __init__(self, query):
         """
 		Initialises the Input object's properties
 		:param query:

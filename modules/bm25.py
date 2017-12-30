@@ -1,77 +1,55 @@
-import pandas as pd
-import gensim
-from gensim import corpora
+from gensim.summarization.bm25 import BM25
 from nltk.tokenize import word_tokenize
-import math
+import pandas as pd
+import operator
+
+class BM25(object):
+    """
+    Class responsible for Calculating BM25 scores with respect to a query and returning best results
+    """
+
+    def __init__(self,data,query):
+        """
+
+        :param data:
+        :param query:
+        """
+        self.data = data
+        self.query = query
+        self.result = self.get_bm25_scores()
 
 
-df = pd.read_csv('sample_ques.csv',header=None,index_col=0,names=['question'])
-print df.head()
+    def get_bm25_scores(self):
+        """
+        Calculates BM25 scores of each document in corpus for a query
 
-class BM25:
+        :param data:
+        :type data: dict
+        :param query:
+        :type query: str
+        :return:
+        :rtype: dict
+        """
+        corpus_df = pd.DataFrame(self.data.values(), index=self.data.keys(), columns=['question'])
+        corpus = [word_tokenize(ques) for ques in corpus_df.question]
+        bm25 = BM25(corpus)
+        average_idf = sum(float(val) for val in bm25.idf.values()) / float(len(bm25.idf))
+        query = word_tokenize(self.query)
+        scores = bm25.get_scores(query, average_idf)
+        corpus_df['scores'] = scores
+        dic = {qid: score for qid, score in zip(corpus_df.index, corpus_df.scores)}
+        sorted_dic = sorted(dic.items(), key=operator.itemgetter(1))
+        return sorted_dic
 
-    def __init__(self,corpus):
-        self.corpus = corpus
-        self.dictionary = corpora.Dictionary()
-        self.buildCorpus()
-        self.docLen = []
-        self.dF = {}
-        self.docTF = []
-        self.N = 0
-        self.docIDF = {}
-        self.generateTFIDF()
-
-    def buildCorpus(self):
-        raw_data = []
-        for data in self.corpus:
-            tokens = word_tokenize(data)
-            raw_data.append(tokens)
-        self.dictionary.add_documents(raw_data)
-
-    def generateTFIDF(self):
-        tot_doc_length = 0
-        for data in self.corpus:
-            doc = word_tokenize(data)
-            tot_doc_length += len(doc)
-            self.docLen.append(len(doc))
-            bow = dict([(term, freq*1/float(len(doc)))for term, freq in self.dictionary.doc2bow(doc)])
-
-
-            for term, tf in bow.items():
-                if term not in self.dF:
-                    self.dF[term] = 0
-                self.dF[term] += 1
-
-            self.docTF.append(bow)
-            self.N = self.N + 1
-
-            for term in self.dF:
-                self.docIDF[term] = math.log((self.N - self.dF[term] + 0.5) / (self.dF[term] + 0.5))
-
-        self.avgDocLen = tot_doc_length / self.N
+    def getKBest(self, dic, k=1):
+        """
+        Selects 'k' best question.reviews after calculating BM25 scores
+        :param dic:
+        :param k:
+        :return:
+        """
+        k_best_vals = {key: dic[key] for key in dic.keys()[:k]}
+        return k_best_vals
 
 
-    def getBM25Scores(self,query=[],k1=1.5, b=0.75):
-        query_bow = self.dictionary.doc2bow(query)
-        scores = []
 
-        for indx, doc in enumerate(self.docTF):
-            common_terms = set(doc.keys()) & set(dict(query_bow).keys())
-            doc_terms_len = self.docLen[indx]
-            temp_score = []
-            for term in common_terms:
-                numertr = (doc[term] * (k1 + 1))
-                denomtr = (doc[term] + k1 * (1 - b + b * (doc_terms_len/ self.avgDocLen)))
-                temp_score.append(self.docIDF[term] * (numertr) / denomtr)
-            scores.append(sum(temp_score))
-        return scores
-
-corpus = df.question.values.tolist()
-bm = BM25(corpus)
-
-query = 'can you fit make up brushes in the trays'
-query = word_tokenize(query)
-
-scores = bm.getBM25Scores(query)
-
-print scores

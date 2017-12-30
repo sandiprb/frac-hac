@@ -105,21 +105,21 @@ class Input(object):
             for other_doc in [doc1, doc2, doc3]:
                 print(doc.similarity(other_doc))
 
-query = "What are the 'B00KYWMYEE' 100 tray size dimensions please? Height - width - depth (how deep is the tray please). I need to know how deep the trays are because I have some taller items that I'd like to store in the case. It isn't stated. Thank you."
-as_in = re.findall(r"[A-Z0-9]{10}",query)
+#query = "What are the 'B00KYWMYEE' 100 tray size dimensions please? Height - width - depth (how deep is the tray please). I need to know how deep the trays are because I have some taller items that I'd like to store in the case. It isn't stated. Thank you."
+#as_in = re.findall(r"[A-Z0-9]{10}",query)
 
-input = Input(unicode(query),as_in)
-input_tokens = input.tokenizeQuery()
+#input = Input(unicode(query),as_in)
+#input_tokens = input.tokenizeQuery()
 
 #stem_query = input.stemQuery(PorterStemmer(), input_tokens)
 #lemma_query = input.lemmatizeQuery(WordNetLemmatizer(), input_tokens)
 
-print input.tokens
+#print input.tokens
 #print input.stemmed_tokens
 #print input.lemma_tokens
 #pattern = re.compile(r"^[A-Z0-9]{10}$")
 #print pattern.match(query)
-print as_in
+#print as_in
 #print as_in
 
 #print query

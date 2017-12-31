@@ -8,9 +8,10 @@ from . import utils
 api = Blueprint('api', __name__)
 
 
-@api.route('/')
+@api.route('/', methods=['POST'])
 def find_by_pid():
-    raw_query = request.args.get('raw_query')
+    request_data = request.get_json()
+    raw_query = request_data['query']
     relevant_question = utils.get_most_relevant_question(raw_query)
     result = {}
     result['success'] = True

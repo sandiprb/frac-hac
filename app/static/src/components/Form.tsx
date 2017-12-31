@@ -1,7 +1,9 @@
 import * as React from "react";
+import Button from './Buttons'
 
 interface IFormProps {
     onSubmitForm: (input)=> void
+    isLoading?:boolean
 }
 
 interface IFormState {
@@ -10,13 +12,12 @@ interface IFormState {
 
 
 export default class Form extends React.Component <IFormProps, IFormState> {
-
     private input: HTMLInputElement;
 
     constructor(props){
         super(props)
         this.state = {
-            searchText: ''
+            searchText: "smooth 602260074X"
         }
     }
 
@@ -28,7 +29,7 @@ export default class Form extends React.Component <IFormProps, IFormState> {
         this.setState({searchText: e.target.value})
     }
 
-    handleSubmitForm =() => {
+    handleSubmitForm = () => {
         this.props.onSubmitForm(this.state.searchText)
     }
 
@@ -39,7 +40,8 @@ export default class Form extends React.Component <IFormProps, IFormState> {
                 <div className="form-group">
                     <input ref={(input) => { this.input = input }} value={this.state.searchText} placeholder='Search for query!' className='form-control' onChange={(e) => this.handleInputChange(e)} />
                 </div>
-                    <button className="button button-purple" onClick={this.handleSubmitForm}> Search </button>
+
+                    <Button className="button button-purple" isLoading={this.props.isLoading} onClick={this.handleSubmitForm.bind(this)} title='Search'/>
             </div>
         )
     }

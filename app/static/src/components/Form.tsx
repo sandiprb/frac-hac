@@ -4,6 +4,7 @@ import Button from './Buttons'
 interface IFormProps {
     onSubmitForm: (input)=> void
     isLoading?:boolean
+    isFormSubmitted: boolean
 }
 
 interface IFormState {
@@ -14,11 +15,16 @@ interface IFormState {
 export default class Form extends React.Component <IFormProps, IFormState> {
     private input: HTMLInputElement;
 
+    static defaultProps = {
+        isFormSubmitted: false
+    }
+
     constructor(props){
         super(props)
         this.state = {
-            searchText: "smooth 602260074X"
+            searchText: "",
         }
+
     }
 
     componentDidMount() {
@@ -34,8 +40,9 @@ export default class Form extends React.Component <IFormProps, IFormState> {
     }
 
     render() {
+        const {isFormSubmitted} = this.props
         return (
-            <div className='form-wrapper'>
+            <div className={`form-wrapper ${isFormSubmitted ? 'submitted': ''}`}>
                 <h2 className="text-center">Welcome! </h2>
                 <div className="form-group">
                     <input ref={(input) => { this.input = input }} value={this.state.searchText} placeholder='Search for query!' className='form-control' onChange={(e) => this.handleInputChange(e)} />

@@ -14,13 +14,22 @@ body {
 
 #app {
     min-height: 100vh;
+    width: 700px;
+    margin: auto;
+}
+
+hr {
+    margin: 8px auto 12px;
 }
 
 .form-wrapper {
-    width: 700px;
-    margin: auto;
     margin-top: 120px;
     text-align: center;
+    @mixin transition;
+    &.submitted {
+        opacity: 0.6;
+        pointer-events: none;
+    }
     .form-group {
         margin: 20px auto;
         width: 580px;
@@ -79,3 +88,29 @@ body {
         background-position: right center;
     }
 }
+
+.answer-wrapper {
+    margin: 60px auto 20px;
+}
+
+.answer-card {
+    padding: 24px 20px 12px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    &:hover {
+        box-shadow: 0px 2px 25px 0px rgba(0,0,0,0.12);
+        z-index: 2;
+    }
+    &__footer {
+        display: flex;
+        &> div {
+            flex: 1;
+        }
+    }
+    .key {
+        opacity: 0.6;
+        font-size: 75%;
+    }
+}
+

@@ -27,9 +27,7 @@
     "react-dom": "^16.2.0",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.19.1",
-    "webpack": "3"
-  },
-  "devDependencies": {
+    "webpack": "3",
     "autoprefixer": "^7.2.3",
     "postcss-color-function": "^4.0.1",
     "postcss-import": "^11.0.0",

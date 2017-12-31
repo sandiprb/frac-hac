@@ -3,9 +3,9 @@ import * as ReactDOM from "react-dom";
 import './App.css'
 
 
-import { Hello } from "./components/Hello";
+import { App } from "./components/App";
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
+    <App />,
     document.getElementById("app")
 );

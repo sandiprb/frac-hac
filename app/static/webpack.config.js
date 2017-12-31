@@ -1,11 +1,15 @@
 const path = require('path')
 const webpack = require('webpack')
 
+const postCSSConfig = require('./src/postcss.config')
+const srcPath = path.resolve(__dirname, 'src');
+
+
 const OUTPUT_PATH = path.join(__dirname, 'build');
 
 module.exports = {
     entry: {
-        app: "./js/index.tsx",
+        app: `${srcPath}/index.tsx`,
         vendor: ["react", "react-dom"],
     },
 
@@ -23,13 +27,18 @@ module.exports = {
 
     module: {
         rules: [
-            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
             { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+            // {
+            //     test: /\.css$/,
+            //     loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]&camelCase!postcss'
+            //   },
 
+            { test: /\.css$/, loader: "style-loader!css-loader!postcss-loader" },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+            // { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
     },
+    // postcss: () => postCSSConfig,
 
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({

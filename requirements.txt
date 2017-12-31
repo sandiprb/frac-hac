@@ -11,6 +11,7 @@ cymem==1.31.2
 cytoolz==0.8.2
 dill==0.2.7.1
 docutils==0.14
+en-core-web-sm==2.0.0
 Flask==0.12.2
 Flask-PyMongo==0.5.1
 ftfy==4.4.3
@@ -48,6 +49,7 @@ sklearn==0.0
 smart-open==1.5.6
 spacy==2.0.5
 termcolor==1.1.0
+textblob==0.15.0
 thinc==6.10.2
 toolz==0.9.0
 tqdm==4.19.5

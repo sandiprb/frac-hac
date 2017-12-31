@@ -1,7 +1,7 @@
 import pandas as pd
 from gensim.summarization.bm25 import BM25 as LibBM25
 from nltk.tokenize import word_tokenize
-
+from processInput import Input
 
 class BM25(object):
 	"""
@@ -30,7 +30,11 @@ class BM25(object):
 		:rtype: dict
 		"""
 		corpus_df = pd.DataFrame(self.data.values(), index=self.data.keys(), columns=['question'])
-		corpus = [word_tokenize(ques) for ques in corpus_df.question]
+		#corpus = [word_tokenize(Input(ques)) for ques in corpus_df.question]
+		corpus = []
+		for ques in corpus_df.question:
+			q = Input(ques)
+			corpus.append(q.tokens)
 		bm25 = LibBM25(corpus)
 		average_idf = sum(float(val) for val in bm25.idf.values()) / float(len(bm25.idf))
 		query = word_tokenize(self.query)

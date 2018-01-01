@@ -62,8 +62,8 @@ class Sentiment(object):
         neg = df_sent[df_sent.Sent == 'Negative'].iloc[0]
         neutral = df_sent[df_sent.Sent == 'Neutral'].iloc[0]
         pos_dic = pos.to_dict()
-        neg_dic = pos.to_dict()
-        neut_dic = pos.to_dict()
+        neg_dic = neg.to_dict()
+        neut_dic = neutral.to_dict()
         return [pos_dic,neg_dic,neut_dic]
 
 

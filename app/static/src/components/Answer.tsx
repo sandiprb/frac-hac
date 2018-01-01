@@ -1,10 +1,10 @@
 import * as React from "react";
-import ContentLoader from "react-content-loader"
+/* import ContentLoader from "react-content-loader" */
 
 import { IAnswer } from '../interface'
 
 
-const AnswerLoader = () => (
+/* const AnswerLoader = () => (
 	<ContentLoader
 		height={200}
 		width={505}
@@ -18,7 +18,7 @@ const AnswerLoader = () => (
 		<rect x="141" y="71" rx="5" ry="5" width="100" height="10" />
 		<rect x="26" y="72" rx="5" ry="5" width="100" height="10" />
 	</ContentLoader>
-)
+) */
 
 interface IProps {
     answer: IAnswer
@@ -34,7 +34,7 @@ export const AnswerCard = ({isFetching, answer}: IProps) => {
 
                 {
                 isFetching ?
-                    <AnswerLoader />
+                    <div />
                  :
                  <div>
                     <h5>{answer.question}</h5>

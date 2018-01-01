@@ -25,6 +25,7 @@ before_script:
   - virtualenv fractal
   - source fractal/bin/activate
   - pip install -r requirements.txt
+  - python -m spacy download en
 
 # To get Django tests to work you may need to create a settings file using
 # the following DATABASES:

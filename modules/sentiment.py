@@ -4,16 +4,16 @@ import pandas as pd
 class Sentiment(object):
 
     def get_reviews_sentiment(self,reviews):
-        """
+        """= 0
+        reviews_df['sentiment_type'] = 0
+        reviews_df[['sentiment_score',  'sentiment_type']] = reviews_df.apply(self.calculateSentiment,axis=1)
+
         Calculates Sentiment analysis of all reviews found and return most relevant and diverse reviews
         :param reviews:
         :return:
         """
         reviews_df = pd.DataFrame(reviews)
-        reviews_df['sentiment_score'] = 0
-        reviews_df['sentiment_type'] = 0
-        reviews_df[['sentiment_score','sentiment_type']] = reviews_df.apply(self.calculateSentiment,axis=1)
-
+        reviews_df['sentiment_score']
         return reviews_df.T.to_dict().values()
 
 
@@ -57,6 +57,7 @@ class Sentiment(object):
         :param df_sent:
         :return:
         """
+
         df_sent = df_sent.sort_values(by='score', ascending=False)
         pos = df_sent[df_sent.Sent == 'Positive'].iloc[0]
         neg = df_sent[df_sent.Sent == 'Negative'].iloc[0]
@@ -64,6 +65,6 @@ class Sentiment(object):
         pos_dic = pos.to_dict()
         neg_dic = neg.to_dict()
         neut_dic = neutral.to_dict()
-        return [pos_dic,neg_dic,neut_dic]
+        return [pos_dic, neg_dic, neut_dic]
 
 

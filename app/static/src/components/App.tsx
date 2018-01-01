@@ -27,8 +27,8 @@ export class App extends React.Component<IAppProps, IAppState> {
         }
     }
 
-    private getAnswer = async(input) => {
-        let answerData = await fetchAnswer(input)
+    private getAnswer = async(pid, query) => {
+        let answerData = await fetchAnswer(pid, query)
         answerData = answerData as IAnswer
         answerData && this.setState({
             answer : answerData,
@@ -37,12 +37,12 @@ export class App extends React.Component<IAppProps, IAppState> {
         })
     }
 
-    handleFormSubmit = (input) => {
+    handleFormSubmit = (pid, query) => {
         this.setState({
             isLoading: true,
             isFormSubmitted: true,
         })
-        this.getAnswer(input)
+        this.getAnswer(pid, query)
     }
 
     handleNewSearch = () => {

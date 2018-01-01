@@ -5,6 +5,7 @@ POSITIVE = 1
 NEGATIVE = -1
 NEUTRAL = 0
 
+
 class Sentiment(object):
 
     def __init__(self, reviews):

@@ -14,30 +14,29 @@ class Input(object):
 		"""
 		Initialises the Input object's properties
 		:param query:
-		:param product_id:
 		"""
 		self.query = query
-		self.product_id = self.extract_pid()
+		# self.product_id = self.extract_pid()
 		self.lower_query = self.__case_query()
 		self.tokens = self.__tokenize_query()
 		self.stemmed_tokens = self.__stem_query(PorterStemmer(), self.tokens)
 		self.lemma_tokens = self.__lemmatize_query(WordNetLemmatizer(), self.tokens)
 		self.words = self.__find_similar_words()
 
-	def extract_pid(self):
-		"""
-		Extracts Product Id from Raw Query
-		:return:
-		"""
-		pid = re.findall(r"[A-Z0-9]{10}", self.query)
-		return pid
+	# def extract_pid(self): # This is now being handled on front-end itself
+	# 	"""
+	# 	Extracts Product Id from Raw Query
+	# 	:return:
+	# 	"""
+	# 	pid = re.findall(r"[A-Z0-9]{10}", self.query)
+	# 	return pid
 
 	def __parse_input_query(self):
 		"""
 		Parses the Input Query text and returns Parsed query.
 		:return:
 		"""
-		parsed_query = nlp(self.query)
+		parsed_query = nlp(unicode(self.query))
 		return parsed_query
 
 	def __case_query(self):

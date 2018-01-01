@@ -16,9 +16,8 @@ class BM25(object):
 		"""
 		self.data = data
 		self.query = query
-		self.result = self.__get_bm25_scores()
 
-	def __get_bm25_scores(self):
+	def get_bm25_scores(self):
 		"""
 		Calculates BM25 scores of each document in corpus for a query
 
@@ -29,7 +28,8 @@ class BM25(object):
 		:return:
 		:rtype: dict
 		"""
-		corpus_df = pd.DataFrame(self.data.values(), index=self.data.keys(), columns=['question'])
+		# corpus_df = pd.DataFrame(self.data.values(), index=self.data.keys(), columns=['question'])
+		corpus_df = pd.DataFrame(self.data)
 		corpus = []
 		for ques in corpus_df.question:
 			q = Input(ques)
@@ -38,24 +38,5 @@ class BM25(object):
 		average_idf = sum(float(val) for val in bm25.idf.values()) / float(len(bm25.idf))
 		query = word_tokenize(self.query)
 		scores = bm25.get_scores(query, average_idf)
-		corpus_df['scores'] = scores
-		return corpus_df.sort_values(by='scores', ascending=False)
-
-	def get_k_best(self, k=1):
-		"""
-		Selects 'k' best question.reviews after calculating BM25 scores
-		:param dic:
-		:param k:
-		:return:
-		"""
-		k_scores = self.result['scores'][:k]
-		k_best_vals = zip(k_scores.index, k_scores)
-		return k_best_vals
-
-	def get_best(self):
-		"""
-		Especially made for lazy devs
-		:return:
-		:rtype: tuple
-		"""
-		return self.get_k_best(k=1)[0]
+		corpus_df['bm25_score'] = scores
+		return corpus_df.T.to_dict().values()

@@ -18,8 +18,9 @@ const fetchAPI = async(data) => {
     }
 }
 
-export const fetchAnswer = async(query: string) => {
+export const fetchAnswer = async(pid: string, query: string) => {
     const queryData = {
+        pid,
         query
     }
     const result = await fetchAPI(queryData)

@@ -14,22 +14,21 @@ class Input(object):
 		"""
 		Initialises the Input object's properties
 		:param query:
-		:param product_id:
 		"""
 		self.query = query
-		self.product_id = self.extract_pid()
+		# self.product_id = self.extract_pid()
 		self.lower_query = self.caseQuery()
 		self.tokens = self.tokenizeQuery()
 		self.stemmed_tokens = self.stemQuery(PorterStemmer(), self.tokens)
 		self.lemma_tokens = self.lemmatizeQuery(WordNetLemmatizer(), self.tokens)
 
-	def extract_pid(self):
-		"""
-		Extracts Product Id from Raw Query
-		:return:
-		"""
-		pid = re.findall(r"[A-Z0-9]{10}", self.query)
-		return pid
+	# def extract_pid(self): # This is now being handled on front-end itself
+	# 	"""
+	# 	Extracts Product Id from Raw Query
+	# 	:return:
+	# 	"""
+	# 	pid = re.findall(r"[A-Z0-9]{10}", self.query)
+	# 	return pid
 
 	def parseInputQuery(self):
 		"""
@@ -98,4 +97,4 @@ class Input(object):
 					similar_words.append(s.lemmas()[0].name())
 		similar_words = set(similar_words)
 		additional_words = {s for s in similar_words if s not in self.tokens}
-		return additional_words	
+		return additional_words

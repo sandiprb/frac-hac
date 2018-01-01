@@ -9,11 +9,10 @@ from modules.sentiment import Sentiment
 from services import queries
 
 
-
-def get_most_relevant_question(raw_query):
+def get_most_relevant_question(raw_query, pid):
     processed_input = ProcessInput(raw_query)
-    product_id = processed_input.product_id[0]
-    data = queries.find_by_asin_with_textscore(product_id, raw_query)
+    data = queries.find_by_asin_with_textscore(pid, raw_query)
+    print (data)
     if not data:
         return None
 
@@ -36,7 +35,6 @@ def get_most_relevant_reviews(query, pid):
     data = queries.find_reviews_by_asin(pid, query)
     if not data:
         return None
-    print (data)
 
     data = {i['id']: i['reviewText'] for i in data}
     bm25 = BM25(data, query)
@@ -57,6 +55,6 @@ def get_sentimented_reviews(reviews):
     :return:
     :rtype:
     """
-    s = Sentiment()
-    sentimented_reviews = s.get_reviews_sentiment(reviews)
+    s = Sentiment(reviews)
+    sentimented_reviews = s.get_reviews_sentiment()
     return sentimented_reviews

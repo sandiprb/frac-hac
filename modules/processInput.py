@@ -17,10 +17,11 @@ class Input(object):
 		"""
 		self.query = query
 		# self.product_id = self.extract_pid()
-		self.lower_query = self.caseQuery()
-		self.tokens = self.tokenizeQuery()
-		self.stemmed_tokens = self.stemQuery(PorterStemmer(), self.tokens)
-		self.lemma_tokens = self.lemmatizeQuery(WordNetLemmatizer(), self.tokens)
+		self.lower_query = self.__case_query()
+		self.tokens = self.__tokenize_query()
+		self.stemmed_tokens = self.__stem_query(PorterStemmer(), self.tokens)
+		self.lemma_tokens = self.__lemmatize_query(WordNetLemmatizer(), self.tokens)
+		self.words = self.__find_similar_words()
 
 	# def extract_pid(self): # This is now being handled on front-end itself
 	# 	"""
@@ -30,7 +31,7 @@ class Input(object):
 	# 	pid = re.findall(r"[A-Z0-9]{10}", self.query)
 	# 	return pid
 
-	def parseInputQuery(self):
+	def __parse_input_query(self):
 		"""
 		Parses the Input Query text and returns Parsed query.
 		:return:
@@ -38,14 +39,14 @@ class Input(object):
 		parsed_query = nlp(unicode(self.query))
 		return parsed_query
 
-	def caseQuery(self):
+	def __case_query(self):
 		"""
 		Lower cases the input query text and returns lower case query
 		"""
 		lower_case_query = self.query.lower()
 		return lower_case_query
 
-	def stemQuery(self, stemmer, tokens):
+	def __stem_query(self, stemmer, tokens):
 		"""
 		#Stems the tokens by removing inflectional forms of the word
 		:param stemmer:
@@ -57,7 +58,7 @@ class Input(object):
 			stemmed_words.append(stemmer.stem(str(word)))
 		return stemmed_words
 
-	def lemmatizeQuery(self, lemmatizer, tokens):
+	def __lemmatize_query(self, lemmatizer, tokens):
 		"""
 		Lemmatizes the tokens by removing inflectional forms of the word
 		:param lemmatizer:
@@ -69,7 +70,7 @@ class Input(object):
 			lemma_words.append(lemmatizer.lemmatize(str(word), pos='n'))
 		return lemma_words
 
-	def tokenizeQuery(self):
+	def __tokenize_query(self):
 		"""
 		Filtered tokens by removing punctuation and stop words
 		:return:
@@ -84,17 +85,17 @@ class Input(object):
 				filtered_words.append(str(word))
 		return filtered_words
 
-	def findSimilarWords(self):
+	def __find_similar_words(self):
 		"""
 		Finds similar words for keywords using wordnet's lexicons DB
 		:return:
 		"""
 		similar_words = []
 		for word in self.tokens:
-			syns = wordnet.synsets(str(word), 'n')
+			syns = wordnet.synsets(str(word))
 			if len(syns) > 0:
 				for s in syns:
 					similar_words.append(s.lemmas()[0].name())
 		similar_words = set(similar_words)
 		additional_words = {s for s in similar_words if s not in self.tokens}
-		return additional_words
+		return list(additional_words) + self.tokens

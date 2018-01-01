@@ -14,8 +14,7 @@ class Sentiment(object):
         reviews_df['sentiment_type'] = 0
         reviews_df[['sentiment_score','sentiment_type']] = reviews_df.apply(self.calculateSentiment,axis=1)
 
-        #return reviews_df
-        df.T.to_dict().values()
+        return reviews_df.T.to_dict().values()
 
 
     def get_answer_sentiment(self,answer):

@@ -1,0 +1,116 @@
+$baseColor: #314451;
+@define-mixin transition $range: all, $time: 0.4s, $ease: cubic-bezier(0.25, 0.8, 0.25, 1) {
+    transition: $range $time $ease;
+}
+
+body {
+    background-color: #D8DDE3;
+    background-image: linear-gradient(0deg,#f5f6f7 0%,#D8DDE3 88%);
+    transition: all 500ms ease;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    color: $baseColor;
+    font-size: 14px;
+}
+
+#app {
+    min-height: 100vh;
+    width: 700px;
+    margin: auto;
+}
+
+hr {
+    margin: 8px auto 12px;
+}
+
+.form-wrapper {
+    margin-top: 120px;
+    text-align: center;
+    @mixin transition;
+    &.submitted {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+    .form-group {
+        margin: 20px auto;
+        width: 580px;
+    }
+    .form-control {
+        background-color: #f7f7fA;
+        height: 53px;
+        border-radius: 3px;
+        border: none;
+        font-size: 16px;
+        @mixin transition;
+        &:focus {
+            box-shadow: 5px 12px 20px rgba(36,37,38,0.13);
+        }
+    }
+}
+
+.button {
+    padding: 10px 15px;
+    border-radius: 3px;
+    transition: all .4s cubic-bezier(.25,.8,.25,1);
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.button-purple {
+    border: 0;
+    background-color: #b066fe;
+    color: #fff;
+    min-width: 180px;
+    width: auto;
+    height: 44px;
+    font-size: 18px;
+    border-radius: 3px;
+    &:not(.loading),
+    &:not(.disabled){
+        &:hover {
+            background-color: #964de2;
+        }
+    }
+}
+
+.button-gradient-blue {
+    cursor: pointer;
+    border: 0;
+    background-image: linear-gradient(to right, #02AAB0 0%, #00CDAC 51%, #02AAB0 100%);
+    /* background-image: linear-gradient(45deg, #f24645, #ebc08d); */
+    color: #fff;
+    min-width: 180px;
+    width: auto;
+    height: 44px;
+    font-size: 18px;
+    &:hover {
+        background-position: right center;
+    }
+}
+
+.answer-wrapper {
+    margin: 60px auto 20px;
+}
+
+.answer-card {
+    padding: 24px 20px 12px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    &:hover {
+        box-shadow: 0px 2px 25px 0px rgba(0,0,0,0.12);
+        z-index: 2;
+    }
+    &__footer {
+        display: flex;
+        &> div {
+            flex: 1;
+        }
+    }
+    .key {
+        opacity: 0.6;
+        font-size: 75%;
+    }
+}
+

@@ -75,7 +75,7 @@ class Input(object):
 		Filtered tokens by removing punctuation and stop words
 		:return:
 		"""
-		parsed_query = self.parseInputQuery()
+		parsed_query = self.__parse_input_query()
 		filtered_words = []
 
 		for word in parsed_query:

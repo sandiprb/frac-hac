@@ -25,5 +25,5 @@ export const fetchAnswer = async(pid: string, query: string) => {
     }
     const result = await fetchAPI(queryData)
     const { data } = result
-    return data[0]
+    return data
 }

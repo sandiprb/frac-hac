@@ -31,9 +31,15 @@ class BM25(object):
 		# corpus_df = pd.DataFrame(self.data.values(), index=self.data.keys(), columns=['question'])
 		corpus_df = pd.DataFrame(self.data)
 		corpus = []
-		for ques in corpus_df.question:
+		df_key = 'reviewText'
+
+		if 'question' in corpus_df.columns:
+			df_key = 'question'
+
+		for ques in corpus_df[df_key]:
 			q = Input(ques)
 			corpus.append(q.tokens)
+
 		bm25 = LibBM25(corpus)
 		average_idf = sum(float(val) for val in bm25.idf.values()) / float(len(bm25.idf))
 		query = word_tokenize(self.query)

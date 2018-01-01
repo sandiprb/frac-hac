@@ -16,9 +16,9 @@ class BM25(object):
 		"""
 		self.data = data
 		self.query = query
-		self.result = self.get_bm25_scores()
+		self.result = self.__get_bm25_scores()
 
-	def get_bm25_scores(self):
+	def __get_bm25_scores(self):
 		"""
 		Calculates BM25 scores of each document in corpus for a query
 
@@ -30,7 +30,6 @@ class BM25(object):
 		:rtype: dict
 		"""
 		corpus_df = pd.DataFrame(self.data.values(), index=self.data.keys(), columns=['question'])
-		#corpus = [word_tokenize(Input(ques)) for ques in corpus_df.question]
 		corpus = []
 		for ques in corpus_df.question:
 			q = Input(ques)

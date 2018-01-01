@@ -3,6 +3,7 @@ from gensim.summarization.bm25 import BM25 as LibBM25
 from nltk.tokenize import word_tokenize
 from processInput import Input
 
+
 class BM25(object):
 	"""
 	Class responsible for Calculating BM25 scores with respect to a query and returning best results

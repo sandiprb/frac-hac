@@ -1,9 +1,9 @@
 import sys  # noqa
+
 sys.path.append("..")  # noqa
 sys.path.append("....")  # noqa
 
-
-from modules.processInput import Input as ProcessInput
+# from modules.processInput import Input as ProcessInput  # noqa
 from modules.bm25 import BM25
 from modules.sentiment import Sentiment
 from services import queries

@@ -21,12 +21,12 @@ class Sentiment(object):
         reviews_df['sentiment_score'] = 0
         reviews_df['sentiment_type'] = 0
         key = 'reviewText'
-        reviews_df[['sentiment_score', 'sentiment_type']] = reviews_df.apply(self.calculate_sentiment, args=([key]), axis=1)
+        reviews_df[['sentiment_score', 'sentiment_type']] = reviews_df.apply(self.calculate_sentiment, args=([key]),
+                                                                             axis=1)
 
         top_3_reviews = self.get_diverse_reviews(reviews_df)
 
         return top_3_reviews
-
 
     def get_answers_sentiment(self):
         """
@@ -38,7 +38,8 @@ class Sentiment(object):
         answer_df['sentiment_score'] = 0
         answer_df['sentiment_type'] = 0
         key = 'answer'
-        answer_df[['sentiment_score', 'sentiment_type']] = answer_df.apply(self.calculate_sentiment, args=([key]), axis=1)
+        answer_df[['sentiment_score', 'sentiment_type']] = answer_df.apply(self.calculate_sentiment, args=([key]),
+                                                                           axis=1)
 
         answer_df = answer_df.sort_values(by='bm25_score', ascending=False)
 
@@ -48,7 +49,6 @@ class Sentiment(object):
             best_answer = answer_df.iloc[0].to_dict()
 
         return best_answer
-
 
     def calculate_sentiment(self, data, key):
         """
@@ -67,7 +67,6 @@ class Sentiment(object):
             senti_type = NEUTRAL
 
         return pd.Series({'sentiment_score': senti_score, 'sentiment_type': senti_type})
-
 
     def get_diverse_reviews(self, reviews_data):
         """

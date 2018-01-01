@@ -35,7 +35,7 @@ class Input(object):
 		Parses the Input Query text and returns Parsed query.
 		:return:
 		"""
-		parsed_query = nlp(self.query)
+		parsed_query = nlp(unicode(self.query))
 		return parsed_query
 
 	def caseQuery(self):
@@ -81,7 +81,7 @@ class Input(object):
 			if (word.is_punct or word.is_stop or word.like_num or word.is_space):
 				pass
 			else:
-				filtered_words.append(word)
+				filtered_words.append(str(word))
 		return filtered_words
 
 	def findSimilarWords(self):

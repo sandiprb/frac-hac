@@ -3,6 +3,7 @@ sys.path.append("..")  # noqa
 
 from flask import Blueprint
 from flask import request, jsonify
+
 from . import utils
 
 api = Blueprint('api', __name__)
@@ -12,7 +13,8 @@ api = Blueprint('api', __name__)
 def find_by_pid():
     request_data = request.get_json()
     raw_query = request_data['query']
-    relevant_question = utils.get_most_relevant_question(raw_query)
+    pid = request_data['pid']
+    relevant_question = utils.get_most_relevant_question(raw_query, pid)
     # ToDO: Move the following reviews to a seprate view & fire two requests from front-end
     relevant_reviews = utils.get_most_relevant_reviews(
         relevant_question[0]['question'],

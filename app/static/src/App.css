@@ -12,6 +12,12 @@ body {
     font-size: 14px;
 }
 
+/* Helper Classes */
+.text-error {
+    color: red;
+    font-size: 12px;
+}
+
 #app {
     min-height: 100vh;
     width: 700px;

@@ -22,7 +22,7 @@ export default class Form extends React.Component <IFormProps, IFormState> {
     constructor(props){
         super(props)
         this.state = {
-            searchText: "",
+            searchText: "can I use 'B00028OSI0'on my face?",
         }
 
     }

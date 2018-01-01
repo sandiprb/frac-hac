@@ -38,3 +38,19 @@ def find_by_asin_with_textscore(asin='', text=''):
         {'score': {'$meta': 'textScore'}})
     result = cursor_to_list(cursor)
     return result
+
+
+def find_reviews_by_ids(review_ids):
+    cursor = mongo.db.reviews.find({'_id': {
+        '$in': [ObjectId(i) for i in review_ids]
+        }})
+    result = cursor_to_list(cursor)
+    return result
+
+
+def find_reviews_by_asin(asin='', text=''):
+    cursor = mongo.db.reviews.find(
+        {'$text': {'$search': text}, 'asin': asin},
+        {'score': {'$meta': 'textScore'}})
+    result = cursor_to_list(cursor)
+    return result

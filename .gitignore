@@ -6,6 +6,9 @@
 *.DS_Store
 .DS_Store
 .idea/
+
+notebooks/.ipynb_checkpoints/
+
 .ipynb_checkpoints/
 *.pyc
 *.csv

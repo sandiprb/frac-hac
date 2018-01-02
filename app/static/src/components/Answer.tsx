@@ -1,8 +1,7 @@
 import * as React from "react";
 /* import ContentLoader from "react-content-loader" */
 
-import { IAnswer } from '../interface'
-
+import { IAnswer } from "../interface";
 
 /* const AnswerLoader = () => (
 	<ContentLoader
@@ -21,35 +20,46 @@ import { IAnswer } from '../interface'
 ) */
 
 interface IProps {
-    answer: IAnswer
-    isFetching: boolean
+  answer: IAnswer;
+  isFetching: boolean;
 }
 
-export const AnswerCard = ({isFetching, answer}: IProps) => {
-    return (
-            <div className="answer-wrapper">
-
-                {answer && <p>Based on your query, we Found following question!</p>}
-                <div className="answer-card">
-
-                {
-                isFetching ?
-                    <div />
-                 :
-                 <div>
-                    <h5>{answer.question}</h5>
-                    <h6 style={{opacity: 0.7}}>{answer.answer}</h6>
-                    <hr/>
-                    <div className="answer-card__footer">
-                        {answer.asin && <div> <span className='key'> Asin: </span> {answer.asin} </div>}
-                        {answer.answerTime && <div><span className='key'> Answer Time: </span> {answer.answerTime} </div>}
-                        {answer.questionType && <div> <span className='key'> Question Type:</span>{answer.questionType} </div>}
-                    </div>
-                 </div>
-                }
+export const AnswerCard = ({ isFetching, answer }: IProps) => {
+  return (
+    <div className="answer-wrapper">
+      {answer && <p>Based on your query, we Found following question!</p>}
+      <div className="answer-card">
+        {isFetching ? (
+          <div />
+        ) : (
+          <div>
+            <h5>{answer.question}</h5>
+            <h6 style={{ opacity: 0.7 }}>{answer.answer}</h6>
+            <hr />
+            <div className="answer-card__footer">
+              {answer.asin && (
+                <div>
+                  {" "}
+                  <span className="key"> Asin: </span> {answer.asin}{" "}
                 </div>
+              )}
+              {answer.answerTime && (
+                <div>
+                  <span className="key"> Answer Time: </span>{" "}
+                  {answer.answerTime}{" "}
+                </div>
+              )}
+              {answer.questionType && (
+                <div>
+                  {" "}
+                  <span className="key"> Question Type:</span>
+                  {answer.questionType}{" "}
+                </div>
+              )}
             </div>
-
-
-    )
-}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

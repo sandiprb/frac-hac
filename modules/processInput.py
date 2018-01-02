@@ -37,7 +37,7 @@ class Input(object):
         Parses the Input Query text and returns Parsed query.
         :return:
         """
-        parsed_query = nlp(unicode(self.query))
+        parsed_query = nlp(unicode(self.query))  # noqa
         return parsed_query
 
     def __case_query(self):

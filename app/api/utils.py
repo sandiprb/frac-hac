@@ -1,26 +1,22 @@
 import sys  # noqa
+
 sys.path.append("..")  # noqa
 sys.path.append("....")  # noqa
 
-
-from modules.processInput import Input as ProcessInput
+# from modules.processInput import Input as ProcessInput  # noqa
 from modules.bm25 import BM25
 from modules.sentiment import Sentiment
 from services import queries
 
 
-
-def get_most_relevant_question(raw_query):
-    processed_input = ProcessInput(raw_query)
-    product_id = processed_input.product_id[0]
-    data = queries.find_by_asin_with_textscore(product_id, raw_query)
+def get_most_relevant_question(raw_query, pid):
+    # processed_input = ProcessInput(raw_query)
+    data = queries.find_by_asin_with_textscore(pid, raw_query)
     if not data:
         return None
 
-    data = {i['id']: i['question'] for i in data}
     bm25 = BM25(data, raw_query)
-    object_id, _ = bm25.get_best()
-    result = queries.find_by_id(object_id)
+    result = bm25.get_bm25_scores()
     return result
 
 
@@ -36,27 +32,31 @@ def get_most_relevant_reviews(query, pid):
     data = queries.find_reviews_by_asin(pid, query)
     if not data:
         return None
-    print (data)
 
-    data = {i['id']: i['reviewText'] for i in data}
     bm25 = BM25(data, query)
-    bm25_reviews = bm25.get_k_best(k=3)
-    review_ids = [i[0] for i in bm25_reviews]
-    db_fetched_reviews = queries.find_reviews_by_ids(review_ids)
-    for i, v in enumerate(db_fetched_reviews):
-        for item in bm25_reviews:
-            if item[0] == v['id']:
-                v['bm25_score'] = item[1]
-    return db_fetched_reviews
+    bm25_reviews = bm25.get_bm25_scores()
+    return bm25_reviews
 
 
-def get_sentimented_reviews(reviews):
+def get_question_setiment(question):
+    """
+    :param review: list of dict of questions with bm25 score
+    :type review: list of dicts
+    :return:
+    :rtype:
+    """
+    s = Sentiment(question)
+    sentimented_question = s.get_answers_sentiment()
+    return sentimented_question
+
+
+def get_reviews_sentiment(reviews):
     """
     :param review: list of dict of reviews with bm25 score
     :type review: list of dicts
     :return:
     :rtype:
     """
-    s = Sentiment()
-    sentimented_reviews = s.get_reviews_sentiment(reviews)
+    s = Sentiment(reviews)
+    sentimented_reviews = s.get_reviews_sentiment()
     return sentimented_reviews

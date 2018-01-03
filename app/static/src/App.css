@@ -46,7 +46,7 @@ hr {
     @mixin transition;
     height: 20vh;
     padding-top: 88px;
-    margin-bottom: 150px;
+    margin-bottom: 180px;
     background-color: $blue;
     &.submitted {
         opacity: 0.6;

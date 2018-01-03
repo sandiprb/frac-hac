@@ -22,7 +22,7 @@ def get_most_relevant_question(raw_query, pid):
     """
     # processed_input = ProcessInput(raw_query)
     data = queries.find_by_asin_with_textscore(pid, raw_query)
-    if not data:
+    if not len(data):
         return None
     doc = Document(data, raw_query, 'question')
     result = doc.get_similar_documents()
@@ -41,7 +41,7 @@ def get_most_relevant_reviews(query, pid):
     :return:
     """
     data = queries.find_reviews_by_asin(pid, query)
-    if not data:
+    if not len(data):
         return None
     doc = Document(data, query, 'reviewText')
     result = doc.get_similar_documents()

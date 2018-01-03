@@ -1,0 +1,42 @@
+{
+  "name": "suber-fractal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "flask",
+    "nlp",
+    "react",
+    "typescript"
+  ],
+  "author": "sandip baradiya",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^16.0.31",
+    "@types/react-dom": "^16.0.3",
+    "autoprefixer": "^7.2.3",
+    "awesome-typescript-loader": "^3.4.1",
+    "css-loader": "^0.28.7",
+    "postcss": "^6.0.14",
+    "postcss-color-function": "^4.0.1",
+    "postcss-discard-comments": "^2.0.4",
+    "postcss-discard-empty": "^2.1.0",
+    "postcss-import": "^11.0.0",
+    "postcss-initial": "^2.0.0",
+    "postcss-loader": "^2.0.9",
+    "postcss-math": "0.0.8",
+    "postcss-mixins": "^6.2.0",
+    "postcss-nested": "^3.0.0",
+    "postcss-simple-vars": "^4.1.0",
+    "react": "^16.2.0",
+    "react-content-loader": "^1.7.3",
+    "react-dom": "^16.2.0",
+    "source-map-loader": "^0.2.3",
+    "style-loader": "^0.19.1",
+    "typescript": "^2.6.2",
+    "webpack": "3"
+  }
+}

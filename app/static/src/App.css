@@ -1,0 +1,159 @@
+$baseColor: #314451;
+$blue: #418cff;
+
+@define-mixin transition $range: all, $time: 0.4s, $ease: cubic-bezier(0.25, 0.8, 0.25, 1) {
+    transition: $range $time $ease;
+}
+
+body {
+    background-color:rgba(216, 221, 227, 0.46);
+   /*  background-image: linear-gradient(0deg,#f5f6f7 0%,#D8DDE3 88%); */
+    transition: all 500ms ease;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    color: $baseColor;
+    font-size: 14px;
+}
+
+/* Helper Classes */
+.text-error {
+    color: red;
+    font-size: 12px;
+}
+
+hr {
+    margin: 8px auto 12px;
+}
+
+#app {
+/*     min-height: 100vh;
+    width: 700px;
+    margin: auto;
+    padding-top: 100px; */
+}
+
+.page-heading {
+    font-size: 20px;
+    color: #fff;
+}
+
+.section {
+    max-width: 700px;
+    margin: auto;
+}
+
+.form-wrapper {
+    text-align: center;
+    @mixin transition;
+    height: 20vh;
+    padding-top: 88px;
+    margin-bottom: 150px;
+    background-color: $blue;
+    &.submitted {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+    .form-group {
+        margin: 20px auto;
+        width: 580px;
+    }
+    .form-control {
+        height: 64px;
+        background-color: #f7f7fA;
+        border-radius: 3px;
+        border: none;
+        font-size: 16px;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+            background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjkgMTI5IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMjkgMTI5IiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgogIDxnPgogICAgPHBhdGggZD0iTTUxLjYsOTYuN2MxMSwwLDIxLTMuOSwyOC44LTEwLjVsMzUsMzVjMC44LDAuOCwxLjgsMS4yLDIuOSwxLjJzMi4xLTAuNCwyLjktMS4yYzEuNi0xLjYsMS42LTQuMiwwLTUuOGwtMzUtMzUgICBjNi41LTcuOCwxMC41LTE3LjksMTAuNS0yOC44YzAtMjQuOS0yMC4yLTQ1LjEtNDUuMS00NS4xQzI2LjgsNi41LDYuNSwyNi44LDYuNSw1MS42QzYuNSw3Ni41LDI2LjgsOTYuNyw1MS42LDk2Ljd6IE01MS42LDE0LjcgICBjMjAuNCwwLDM2LjksMTYuNiwzNi45LDM2LjlDODguNSw3Miw3Miw4OC41LDUxLjYsODguNWMtMjAuNCwwLTM2LjktMTYuNi0zNi45LTM2LjlDMTQuNywzMS4zLDMxLjMsMTQuNyw1MS42LDE0Ljd6IiBmaWxsPSIjMDA2REYwIi8+CiAgPC9nPgo8L3N2Zz4K);
+    background-size: 22px;
+    background-repeat: no-repeat;
+    background-position: 98% center;
+    padding-right: 44px;
+        @mixin transition;
+        &:focus {
+            box-shadow: 5px 12px 20px rgba(36,37,38,0.13);
+        }
+    }
+}
+
+.button {
+    padding: 10px 15px;
+    border-radius: 3px;
+    transition: all .4s cubic-bezier(.25,.8,.25,1);
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.button-purple {
+    border: 0;
+    background-color: #3F51B5;
+    color: #fff;
+    min-width: 180px;
+    width: auto;
+    height: 44px;
+    font-size: 18px;
+    border-radius: 3px;
+    &:not(.loading),
+    &:not(.disabled){
+        &:hover {
+            background-color: #3F51B5;
+        }
+    }
+}
+
+.button-gradient-blue {
+    cursor: pointer;
+    border: 0;
+    background-image: linear-gradient(to right, #02AAB0 0%, #00CDAC 51%, #02AAB0 100%);
+    /* background-image: linear-gradient(45deg, #f24645, #ebc08d); */
+    color: #fff;
+    min-width: 180px;
+    width: auto;
+    height: 44px;
+    font-size: 18px;
+    &:hover {
+        background-position: right center;
+    }
+}
+
+.answer-wrapper {
+    margin: 20px auto;
+}
+
+.answer-card {
+    padding: 24px 20px 12px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    &__footer {
+        display: flex;
+        &> div {
+            flex: 1;
+        }
+    }
+    .key {
+        opacity: 0.6;
+        font-size: 75%;
+    }
+}
+
+
+/* Animations */
+@keyframes unitAppearUp {
+  0% {
+    opacity:0.5;
+    transform:translateY(200px);
+  }
+  100% {
+    opacity:1;
+    transform:translateY(0px);
+  }
+}
+
+.unit-appear-up {
+  animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    animation-fill-mode: both;
+    animation-name:unitAppearUp;
+}

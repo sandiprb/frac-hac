@@ -4,12 +4,15 @@ sys.path.append("..")  # noqa
 sys.path.append("....")  # noqa
 
 # from modules.processInput import Input as ProcessInput  # noqa
+from functools32 import lru_cache
+
 from modules.bm25 import BM25
 from modules.sentiment import Sentiment
 from modules.getdocuments import Document
 from services import queries
 
 
+@lru_cache()
 def get_most_relevant_question(raw_query, pid):
     """
     Returns set of most relevant questions using Spacy's doc similarity and BM25
@@ -29,6 +32,7 @@ def get_most_relevant_question(raw_query, pid):
     return result
 
 
+@lru_cache()
 def get_most_relevant_reviews(query, pid):
     """
     Returns set of most relevant reviews using Spacy's doc similarity and BM25

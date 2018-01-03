@@ -20,19 +20,20 @@ def find_by_pid():
         # ToDO: Move the following reviews to a seprate view & fire two requests from front-end
         relevant_reviews = utils.get_most_relevant_reviews(raw_query, pid)
 
-        question_setiment = utils.get_question_setiment(relevant_question)
+        answer_sentiment = utils.get_answer_sentiment(relevant_question)
         reviews_sentiment = utils.get_reviews_sentiment(relevant_reviews)
 
         response['success'] = True
-        response['data'] = question_setiment
+        response['data'] = answer_sentiment
         response['reviews'] = reviews_sentiment
 
-        if not question_setiment:
+        if not answer_sentiment:
             response['success'] = False
             response['data'] = 'No data found!'
 
         if not reviews_sentiment:
             response['reviews'] = 'No data found!'
+
     else:
         response['success'] = False
         response['error'] = 'Please enter a valid search query'

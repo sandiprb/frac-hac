@@ -42,7 +42,7 @@ def get_most_relevant_reviews(query, pid):
     return bm25_reviews
 
 
-def get_question_setiment(question):
+def get_answer_sentiment(question):
     """
     Returns 1 best question along with it's sentiment
     :param question:

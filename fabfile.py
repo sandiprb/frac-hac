@@ -1,5 +1,5 @@
 from fabric.api import local, env, settings, abort, run, cd, prefix, sudo, prompt
-from fabric.colors import green, red, yellow
+from fabric.colors import green, red
 from fabric.api import settings  # noqa
 from contextlib import contextmanager as _contextmanager
 from pyfiglet import Figlet
@@ -17,6 +17,7 @@ STATIC_DIR = '{}/static'.format(APP_DIR)
 SUPERVISOR_CONF = 'app'
 
 figlet = Figlet(font='slant')
+
 
 def _sudo_patch(*args, **kwargs):
     return sudo(*args, **kwargs)

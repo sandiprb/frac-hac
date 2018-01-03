@@ -1,6 +1,7 @@
 from urllib import quote_plus
 
 DEBUG = True
+HOST = '0.0.0.0'
 
 DB_NAME = 'test'
 DB_USER = 'fractal'

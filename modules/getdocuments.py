@@ -16,7 +16,7 @@ class Document(object):
         :type column:
         """
         self.data = pd.DataFrame(data)
-        self.query = unicode(query)
+        self.query = unicode(query)  # noqa
         self.column = column
         # self.documents = self.get_documents()
 

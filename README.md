@@ -61,3 +61,4 @@ _refer to Makefile for details on make commands_
  - [Full-Text Search in MongoDB](https://code.tutsplus.com/tutorials/full-text-search-in-mongodb--cms-24835)
  - [Flask Series: Views and Web Forms](https://damyanon.net/post/flask-series-views/)
  - [Spacy english module](https://spacy.io/usage/models)
+ - [Setting up MongoDB on Ubuntu 16.04 VPS](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-mongodb-on-ubuntu-16-04)

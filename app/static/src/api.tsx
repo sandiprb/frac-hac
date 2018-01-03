@@ -12,8 +12,9 @@ const fetchAPI = async data => {
 		})
 		const { status } = response
 		if (status == 200) {
-			const result = await response.json()
-			return result
+			let result = await response.text()
+			result = result.replace(/\bNaN\b/g, null)
+			return JSON.parse(result)
 		} else {
 			return { error }
 		}

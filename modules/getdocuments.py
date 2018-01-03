@@ -3,6 +3,7 @@ import spacy
 
 nlp = spacy.load('en')
 
+
 class Document(object):
 
     def __init__(self, data, query, column):

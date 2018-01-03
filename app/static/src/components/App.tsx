@@ -28,7 +28,7 @@ export class App extends React.Component<IAppProps, IAppState> {
 	}
 
 	private getAnswer = async (pid, query) => {
-		const { data: answer, success: apiSuccess, error: apiError = '' } = await APIfetchAnswer(pid, query)
+		const { data: answer, success: apiSuccess, error: apiError = 'No data found' } = await APIfetchAnswer(pid, query)
 		const newState = {
 			isLoading: false,
 			isAnswerFetched: true,

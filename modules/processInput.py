@@ -1,9 +1,7 @@
-# import re
-
 import spacy
+from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
 from nltk.stem.porter import PorterStemmer
-from nltk.corpus import wordnet
 
 nlp = spacy.load('en')
 

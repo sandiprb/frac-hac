@@ -1,14 +1,9 @@
-import sys  # noqa
-
-sys.path.append("..")  # noqa
-sys.path.append("....")  # noqa
-
 # from modules.processInput import Input as ProcessInput  # noqa
 from functools32 import lru_cache
 
 from modules.bm25 import BM25
-from modules.sentiment import Sentiment
 from modules.getdocuments import Document
+from modules.sentiment import Sentiment
 from services import queries
 
 

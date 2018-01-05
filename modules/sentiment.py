@@ -23,8 +23,7 @@ class Sentiment(object):
         :rtype:
         """
         self.data[CONST.COL_SCORE], self.data[CONST.COL_TYPE] = 0, 0
-        self.data[[CONST.COL_SCORE, CONST.COL_TYPE]] = self.data.apply(self.__get_type, args=([self.column]),
-                                                                       axis=1)
+        self.data[[CONST.COL_SCORE, CONST.COL_TYPE]] = self.data.apply(self.__get_type, axis=1)
         self.data.sort_values(by=CONST.COL_BM25, ascending=False)
         if self.column == CONST.COL_REVIEW:
             self.data = self.get_diverse_reviews()
@@ -34,12 +33,15 @@ class Sentiment(object):
     def __get_type(self, data):
         """
         Calculates sentiment of a reviewText and returns Sentiment score and Sentiment Type
-        :param data:
+        :param data: Series
         :return:
         """
+        if self.column == CONST.COL_QUESTION:
+            doc = data[CONST.COL_ANSWER]
+        else:
+            doc = data[CONST.COL_REVIEW]
 
-        data_text = data[self.column]
-        senti_score = TextBlob(data_text).sentiment.polarity
+        senti_score = TextBlob(doc).sentiment.polarity
 
         if senti_score > 0:
             senti_type = Type.POSITIVE

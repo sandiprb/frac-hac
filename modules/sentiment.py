@@ -40,11 +40,11 @@ class Sentiment(object):
         senti_score = TextBlob(doc).sentiment.polarity
 
         if senti_score > 0:
-            senti_type = Type.POSITIVE
+            senti_type = Type.POSITIVE.value
         elif senti_score < 0:
-            senti_type = Type.NEGATIVE
+            senti_type = Type.NEGATIVE.value
         else:
-            senti_type = Type.NEUTRAL
+            senti_type = Type.NEUTRAL.value
 
         return pd.Series({CONST.COL_SCORE: senti_score, CONST.COL_TYPE: senti_type})
 

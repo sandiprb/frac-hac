@@ -1,12 +1,8 @@
 import pandas as pd
-from aenum import Enum
 from textblob import TextBlob
 
 from const import CONST
-
-
-class Type(Enum):
-    NEGATIVE, NEUTRAL, POSITIVE = -1, 0, 1
+from type import SentimentType as Type
 
 
 class Sentiment(object):

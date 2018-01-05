@@ -67,6 +67,11 @@ class Document(object):
         return self.data.T.to_dict().values() if self.__data_exists() else None
 
     def __data_exists(self):
+        """
+        Returns True if data exists else false.
+        :return: Bool value
+        :rtype: Bool
+        """
         if self.data is None:
             return False
         elif self.data.empty:

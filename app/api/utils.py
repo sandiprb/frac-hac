@@ -21,7 +21,7 @@ def get_most_relevant_question(raw_query, pid):
     data = queries.find_by_asin_with_textscore(pid, raw_query)
     if not len(data):
         return None
-    doc = Document(data, raw_query, CONST.COL_QUESTION)
+    doc = Document(data, raw_query, CONST.COL_QUESTION, threshold=0.3)
     result = doc.get_scored_docs()
 
     return result
@@ -38,7 +38,7 @@ def get_most_relevant_reviews(query, pid):
     data = queries.find_reviews_by_asin(pid, query)
     if not len(data):
         return None
-    doc = Document(data, query, CONST.COL_REVIEW)
+    doc = Document(data, query, CONST.COL_REVIEW, threshold=0.3)
     result = doc.get_scored_docs()
 
     return result

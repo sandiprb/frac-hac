@@ -1,3 +1,6 @@
+import sys  # noqa
+sys.path.append("..")  # noqa
+
 from flask import Blueprint
 from flask import request, jsonify
 

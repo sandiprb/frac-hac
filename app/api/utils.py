@@ -1,4 +1,6 @@
 # from modules.processInput import Input as ProcessInput  # noqa
+import sys  # noqa
+sys.path.append("..")  # noqa
 from functools32 import lru_cache
 
 from modules.const import CONST

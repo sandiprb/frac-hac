@@ -80,7 +80,8 @@ export default class Form extends React.Component<IFormProps, IFormState> {
 		const { searchText, errorMsg } = this.state
 		return (
 			<div className={`form-wrapper ${isFormSubmitted ? 'submitted' : ''}`}>
-				<h2 className="page-heading text-center">Welcome! </h2>
+				<h1 className="text-center">Welcome! </h1>
+				<h4 className="text-center page-heading ">Search for your query. </h4>
 				<div className="form-group">
 					<input
 						ref={input => {

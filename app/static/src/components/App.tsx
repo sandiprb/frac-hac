@@ -5,6 +5,26 @@ import { AnswerCard } from './Answer'
 import { fetchAnswer as APIfetchAnswer } from '../api'
 import { IAnswer } from '../interface'
 
+
+const sentiment = {
+	'0': {
+		emoji: '😑',
+		text: 'NEUTRAL',
+		className: 'primary',
+	},
+	'1': {
+		emoji: '😄',
+		text: 'POSITIVE',
+		className: 'success',
+	},
+	'-1': {
+		emoji: '😟',
+		text: 'NAGATIVE',
+		className: 'danger',
+	}
+}
+
+
 interface IAppProps {}
 
 interface IAppState {
@@ -77,23 +97,22 @@ export class App extends React.Component<IAppProps, IAppState> {
 
 	render() {
 		const { isLoading, isAnswerFetched, isFormSubmitted, answer, anwerApiResponse, reviews } = this.state
-		const reviewMojis = {
-			'0': '😑',
-			'1': '😄',
-			'-1': '😟',
-		}
-
 		const reviewsJSX =
-			reviews.length &&
+		reviews && reviews.length ?
 			reviews.map((v, i) => {
 				return (
 					<div className="card" key={i} style={{ marginTop: 12 }}>
 						<div className="card bg-light3">
 							<div className="card-header">
-								<div className="pull-right">BM25 Score: {parseFloat(v.bm25_score).toFixed(2)}</div>
+								<div className="pull-right">
+								<small> BM25 Score:  </small> {parseFloat(v.bm25_score).toFixed(2)}
+								</div>
 								<div>
-									Sentiment:
-									{reviewMojis[v.sentiment_type]}
+									<small> Sentiment: </small>
+									{sentiment[v.sentiment_type].emoji} {'     '}
+									<span className={`badge badge-${sentiment[v.sentiment_type].className}`}>
+									{sentiment[v.sentiment_type].text}
+									</span>
 								</div>
 							</div>
 
@@ -104,7 +123,7 @@ export class App extends React.Component<IAppProps, IAppState> {
 						</div>
 					</div>
 				)
-			})
+			}): null
 
 		return (
 			<div>
@@ -113,7 +132,7 @@ export class App extends React.Component<IAppProps, IAppState> {
 					<section className="section">
 						{answer ? (
 							<div>
-								<p>We found a related answer!</p>
+								<h5>We found a similar answer!</h5>
 								<AnswerCard answer={answer} />
 								<div className="text-right">
 									<button className="btn btn-link" onClick={this.handleNewSearch}>
@@ -124,9 +143,9 @@ export class App extends React.Component<IAppProps, IAppState> {
 						) : (
 							<div className="alert alert-danger">{anwerApiResponse}</div>
 						)}
-						{reviews.length ? (
-							<div>
-								<h4>Matched Reviews for the product: </h4>
+						{reviews && reviews.length ? (
+							<div className="unit-appear-up ">
+								<h5>Matched Reviews for the product: </h5>
 								{reviewsJSX}
 							</div>
 						) : null}

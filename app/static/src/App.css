@@ -7,17 +7,20 @@ $blue: #418cff;
 
 body {
     background-color:rgba(216, 221, 227, 0.46);
-   /*  background-image: linear-gradient(0deg,#f5f6f7 0%,#D8DDE3 88%); */
     transition: all 500ms ease;
     font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
     color: $baseColor;
     font-size: 14px;
+    padding-bottom: 80px;
 }
 
 /* Helper Classes */
 .text-error {
     color: red;
-    font-size: 12px;
+        font-size: 14px;
+    text-align: left;
+    margin-top: 8px;
+
 }
 
 hr {
@@ -25,10 +28,6 @@ hr {
 }
 
 #app {
-/*     min-height: 100vh;
-    width: 700px;
-    margin: auto;
-    padding-top: 100px; */
 }
 
 .page-heading {
@@ -45,9 +44,12 @@ hr {
     text-align: center;
     @mixin transition;
     height: 20vh;
-    padding-top: 88px;
+    padding-top: 42px;
     margin-bottom: 180px;
     background-color: $blue;
+    h1, h2 {
+        color: #fff;
+    }
     &.submitted {
         opacity: 0.6;
         pointer-events: none;

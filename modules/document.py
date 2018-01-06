@@ -21,7 +21,7 @@ class Document(object):
         :param column:
         :type column:
         """
-        self.data = pd.DataFrame(data)
+        self.data = pd.DataFrame(data).fillna(0)
         self.query = unicode(query)  # noqa
         self.column = column
         self.threshold = threshold
@@ -63,6 +63,9 @@ class Document(object):
         if self.__data_exists():
             sentiment = Sentiment(self.data, self.column)
             self.data = sentiment.get_sentiment()
+
+        if self.__data_exists() and self.column == CONST.COL_QUESTION:
+            return self.data.iloc[0].to_dict()
 
         return self.data.T.to_dict().values() if self.__data_exists() else None
 

@@ -13,6 +13,7 @@ interface IAppState {
 	isAnswerFetched: boolean
 	isFormSubmitted: boolean
 	anwerApiResponse?: string
+	reviews?: any
 }
 
 export class App extends React.Component<IAppProps, IAppState> {
@@ -24,14 +25,19 @@ export class App extends React.Component<IAppProps, IAppState> {
 			isLoading: false,
 			isFormSubmitted: false,
 			isAnswerFetched: false,
+			reviews: [],
 		}
 	}
 
 	private getAnswer = async (pid, query) => {
-		const { data: answer, success: apiSuccess, error: apiError = 'No data found' } = await APIfetchAnswer(pid, query)
+		const { data: answer, success: apiSuccess, error: apiError = 'No data found', reviews = [] } = await APIfetchAnswer(
+			pid,
+			query
+		)
 		const newState = {
 			isLoading: false,
 			isAnswerFetched: true,
+			reviews,
 		}
 		if (!apiSuccess) {
 			this.setState({
@@ -65,8 +71,44 @@ export class App extends React.Component<IAppProps, IAppState> {
 		})
 	}
 
+	getReviewsJSX = () => {
+		const {reviews} = this.state
+	}
+
 	render() {
-		const { isLoading, isAnswerFetched, isFormSubmitted, answer, anwerApiResponse } = this.state
+		const { isLoading, isAnswerFetched, isFormSubmitted, answer, anwerApiResponse, reviews } = this.state
+		const reviewMojis = {
+			'0': '😑',
+			'1':'😄',
+			'-1':'😟',
+		}
+
+		const reviewsJSX = reviews.length && reviews.map((v, i) => {
+return (
+			<div className="card" key={i} style={{marginTop: 12}}>
+						<div className="card bg-light3">
+							<div className="card-header">
+
+
+							<div className="pull-right">
+								BM25 Score: {parseFloat(v.bm25_score).toFixed(2)}
+
+							</div>
+								<div>
+
+								Sentiment:
+								{reviewMojis[v.sentiment_type]}
+								</div>
+							</div>
+
+							<div className="card-body">
+								<h4 className="card-title"> {v.summary} </h4>
+								<p className="card-text">{v.reviewText}</p>
+							</div>
+						</div>
+					</div>
+					)
+				})
 
 		return (
 			<div>
@@ -86,8 +128,16 @@ export class App extends React.Component<IAppProps, IAppState> {
 						) : (
 							<div className="alert alert-danger">{anwerApiResponse}</div>
 						)}
+						{reviews.length ?
+						<div>
+							<h4>Matched Reviews for the product: </h4>
+							{reviewsJSX}
+						</div>
+						: null}
 					</section>
 				)}
+
+
 			</div>
 		)
 	}

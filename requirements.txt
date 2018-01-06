@@ -20,7 +20,6 @@ cymem==1.31.2
 cytoolz==0.8.2
 dill==0.2.7.1
 docutils==0.14
-en-core-web-sm==2.0.0
 enum34==1.1.6
 Fabric==1.14.0
 Flask==0.12.2

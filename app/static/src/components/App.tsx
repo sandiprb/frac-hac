@@ -72,32 +72,28 @@ export class App extends React.Component<IAppProps, IAppState> {
 	}
 
 	getReviewsJSX = () => {
-		const {reviews} = this.state
+		const { reviews } = this.state
 	}
 
 	render() {
 		const { isLoading, isAnswerFetched, isFormSubmitted, answer, anwerApiResponse, reviews } = this.state
 		const reviewMojis = {
 			'0': '😑',
-			'1':'😄',
-			'-1':'😟',
+			'1': '😄',
+			'-1': '😟',
 		}
 
-		const reviewsJSX = reviews.length && reviews.map((v, i) => {
-return (
-			<div className="card" key={i} style={{marginTop: 12}}>
+		const reviewsJSX =
+			reviews.length &&
+			reviews.map((v, i) => {
+				return (
+					<div className="card" key={i} style={{ marginTop: 12 }}>
 						<div className="card bg-light3">
 							<div className="card-header">
-
-
-							<div className="pull-right">
-								BM25 Score: {parseFloat(v.bm25_score).toFixed(2)}
-
-							</div>
+								<div className="pull-right">BM25 Score: {parseFloat(v.bm25_score).toFixed(2)}</div>
 								<div>
-
-								Sentiment:
-								{reviewMojis[v.sentiment_type]}
+									Sentiment:
+									{reviewMojis[v.sentiment_type]}
 								</div>
 							</div>
 
@@ -107,8 +103,8 @@ return (
 							</div>
 						</div>
 					</div>
-					)
-				})
+				)
+			})
 
 		return (
 			<div>
@@ -128,16 +124,14 @@ return (
 						) : (
 							<div className="alert alert-danger">{anwerApiResponse}</div>
 						)}
-						{reviews.length ?
-						<div>
-							<h4>Matched Reviews for the product: </h4>
-							{reviewsJSX}
-						</div>
-						: null}
+						{reviews.length ? (
+							<div>
+								<h4>Matched Reviews for the product: </h4>
+								{reviewsJSX}
+							</div>
+						) : null}
 					</section>
 				)}
-
-
 			</div>
 		)
 	}

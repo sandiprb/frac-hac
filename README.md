@@ -56,7 +56,7 @@ _refer to Makefile for details on make commands_
 
 
 
-## Other important links
+## Important links
  - [Using PyMongo with flask](http://www.bogotobogo.com/python/MongoDB_PyMongo/python_MongoDB_RESTAPI_with_Flask.php)
  - [Full-Text Search in MongoDB](https://code.tutsplus.com/tutorials/full-text-search-in-mongodb--cms-24835)
  - [Flask Series: Views and Web Forms](https://damyanon.net/post/flask-series-views/)

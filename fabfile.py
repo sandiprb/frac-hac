@@ -16,14 +16,22 @@ APP_DIR = '~/var/www/fractal_hackathon/app'
 STATIC_DIR = '{}/static'.format(APP_DIR)
 SUPERVISOR_CONF = 'app'
 
-figlet = Figlet(font='slant')
-
 
 def _sudo_patch(*args, **kwargs):
     return sudo(*args, **kwargs)
 
 
 _sudo = _sudo_patch
+
+
+def deploy():
+    _confirm()
+    with cd(APP_DIR):
+        with _virtualenv():
+            run('git pull origin master')
+            set_requirements()
+            _setup_static()
+            _restart_app()
 
 
 @_contextmanager
@@ -49,17 +57,8 @@ def _setup_static():
         run('node ./node_modules/webpack/bin/webpack.js -p')
 
 
-def deploy():
-    _confirm()
-    with cd(APP_DIR):
-        with _virtualenv():
-            run('git pull origin master')
-            set_requirements()
-            _setup_static()
-            _restart_app()
-
-
 def _confirm():
+    figlet = Figlet(font='slant')
     response = prompt("""
         type YES to continue to deploy ===>
         """)

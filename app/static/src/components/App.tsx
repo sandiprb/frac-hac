@@ -18,7 +18,7 @@ const sentiment = {
   },
   "-1": {
     emoji: "😟",
-    text: "NAGATIVE",
+    text: "NEGATIVE",
     className: "danger"
   }
 };

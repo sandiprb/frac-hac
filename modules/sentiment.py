@@ -20,7 +20,7 @@ class Sentiment(object):
         """
         self.data[CONST.COL_SCORE], self.data[CONST.COL_TYPE] = 0, 0
         self.data[[CONST.COL_SCORE, CONST.COL_TYPE]] = self.data.apply(self.__get_type, axis=1)
-        self.data.sort_values(by=CONST.COL_BM25, ascending=False)
+        self.data = self.data.sort_values(by=CONST.COL_BM25, ascending=False)
         if self.column == CONST.COL_REVIEW:
             self.data = self.get_diverse_reviews()
 

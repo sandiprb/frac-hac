@@ -164,7 +164,9 @@ export class App extends React.Component<IAppProps, IAppState> {
                 <h5>Matched Reviews for the product: </h5>
                 {reviewsJSX}
               </div>
-            ) : null}
+            ) :
+            <div className="alert alert-info">No relevant reviews found</div>
+          }
           </section>
         )}
       </div>

@@ -20,7 +20,7 @@ class Sentiment(object):
         """
         self.data[CONST.COL_SCORE], self.data[CONST.COL_TYPE] = 0, 0
         self.data[[CONST.COL_SCORE, CONST.COL_TYPE]] = self.data.apply(self.__get_type, axis=1)
-        self.data = self.data.sort_values(by=CONST.COL_BM25, ascending=False)
+        self.data = self.data = self.data.sort_values(by=CONST.COL_BM25, ascending=False)
         if self.column == CONST.COL_REVIEW:
             self.data = self.get_diverse_reviews()
 
@@ -55,14 +55,16 @@ class Sentiment(object):
         :rtype:
         """
         self.data[CONST.COL_DELETE] = False
-        i, row_types = 1, [self.data[CONST.COL_TYPE][0]]
+        i, index, row_types = 1, 1, [self.data[CONST.COL_TYPE][0]]
+        length = self.data.shape[0]
 
-        while i > 3:
+        while i > 3 and index < length:
             col_type = self.data.iloc[i][CONST.COL_TYPE]
             if col_type not in row_types:
                 self.data[CONST.COL_DELETE] = True
                 row_types.append(col_type)
-            i += 1
+                i += 1
+            index += 1
 
         self.data = self.data[self.data[CONST.COL_DELETE] == False][:3]
         self.data = self.data.drop(CONST.COL_DELETE, axis=1)

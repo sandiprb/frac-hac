@@ -1,4 +1,7 @@
 # Hackathon Challenge
+ - [Problem Statement](https://github.com/sandiprb/frac-hac/blob/master/problem-statement.pdf)
+ - [Solution Presentation](https://github.com/sandiprb/frac-hac/blob/master/Team2-Final-Fractal-Presentation.pdf)
+
 
 ## Basic Structure
 The structure is as follows:

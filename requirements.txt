@@ -43,7 +43,7 @@ mccabe==0.6.1
 msgpack-numpy==0.4.1
 msgpack-python==0.4.8
 murmurhash==0.28.0
-nltk==3.2.5
+nltk==3.4.5
 nodeenv==1.2.0
 numpy==1.13.3
 pandas==0.21.1

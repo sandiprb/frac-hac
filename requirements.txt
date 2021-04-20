@@ -54,7 +54,7 @@ pluggy==0.6.0
 pprint==0.1
 pre-commit==1.4.1
 preshed==1.0.0
-py==1.5.2
+py==1.10.0
 pyasn1==0.4.2
 pycparser==2.18
 pyfiglet==0.7.5

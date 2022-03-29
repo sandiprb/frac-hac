@@ -47,7 +47,7 @@ nltk==3.2.5
 nodeenv==1.2.0
 numpy==1.13.3
 pandas==0.21.1
-paramiko==2.4.0
+paramiko==2.10.1
 pathlib==1.0.1
 plac==0.9.6
 pluggy==0.6.0
